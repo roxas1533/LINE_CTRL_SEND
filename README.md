@@ -1,0 +1,2 @@
+# LINE_CTRL_SEND
+LINEの送信をCTRL＋ENTERでもできるようにするツール
