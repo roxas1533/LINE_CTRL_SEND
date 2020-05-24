@@ -91,7 +91,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	}
 	hwnd = CreateWindow(
 		TEXT("LINE_CTRL"), TEXT("LINE_CTRL"),
-		WS_OVERLAPPEDWINDOW|WS_VISIBLE,
+		WS_OVERLAPPEDWINDOW,
 		0, 0, 0, 0, NULL, NULL,
 		hInstance, NULL
 	);
