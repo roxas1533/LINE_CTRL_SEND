@@ -1,24 +1,11 @@
 #include <Windows.h>
 #include <tchar.h>
 
-HANDLE hMSP;
-int WINAPI WinMain(HINSTANCE hInstance,
-	HINSTANCE hPrevInstance,
-	LPSTR lpCmdLine,
-	int nCmdShow
-){
-	bool ctFlag=false;
-	bool enFlag = false;
-	hMSP = CreateMutex(NULL, TRUE,L"LINE-CTRL");
-	if (GetLastError() == ERROR_ALREADY_EXISTS) {
-		MessageBox(NULL, L"多重起動"
-			, L"LINE-CTRL", MB_OK);
-		ReleaseMutex(hMSP);
-		CloseHandle(hMSP);
-		return FALSE;
-	}
-	while (1) {
-		TCHAR className[1024];
+bool ctFlag = false;
+bool enFlag = false;
+TCHAR className[1024];
+VOID CALLBACK TimerProc(HWND hWnd, UINT uMsg, UINT idEvent, DWORD dwTime) {
+
 		HWND hwnd = GetForegroundWindow();
 		GetClassName(hwnd, className, 1024);
 		TCHAR p[] = TEXT("Qt5QWindowIcon");
@@ -59,11 +46,58 @@ int WINAPI WinMain(HINSTANCE hInstance,
 			if (!(GetAsyncKeyState(VK_CONTROL) & 0x8000)) {
 				ctFlag = false;
 			}
-		}
-		Sleep(1);
 	}
-	ReleaseMutex(hMSP);
-	CloseHandle(hMSP);
+}
 
-	return 0;
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
+	switch (msg) {
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		return 0;
+	case WM_CREATE:
+		SetTimer(hwnd, 1, 10, (TIMERPROC)TimerProc);
+		return 0;
+	}
+	return DefWindowProc(hwnd, msg, wp, lp);
+}
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+	PSTR lpCmdLine, int nCmdShow) {
+	HWND hwnd;
+	MSG msg;
+	WNDCLASS winc;
+
+	winc.style = CS_HREDRAW | CS_VREDRAW;
+	winc.lpfnWndProc = WndProc;
+	winc.cbClsExtra = winc.cbWndExtra = 0;
+	winc.hInstance = hInstance;
+	winc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+	winc.hCursor = LoadCursor(NULL, IDC_ARROW);
+	winc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	winc.lpszMenuName = NULL;
+	winc.lpszClassName = TEXT("LINE_CTRL");
+
+	if (!RegisterClass(&winc)) return 0;
+	HANDLE hMSP;
+
+
+	hMSP = CreateMutex(NULL, TRUE, L"LINE-CTRL");
+	if (GetLastError() == ERROR_ALREADY_EXISTS) {
+		MessageBox(NULL, L"多重起動"
+			, L"LINE-CTRL", MB_OK);
+		ReleaseMutex(hMSP);
+		CloseHandle(hMSP);
+		return FALSE;
+	}
+	hwnd = CreateWindow(
+		TEXT("LINE_CTRL"), TEXT("LINE_CTRL"),
+		WS_OVERLAPPEDWINDOW|WS_VISIBLE,
+		0, 0, 0, 0, NULL, NULL,
+		hInstance, NULL
+	);
+
+	if (hwnd == NULL) return 1;
+
+	while (GetMessage(&msg, NULL, 0, 0)) DispatchMessage(&msg);
+	return msg.wParam;
 }
