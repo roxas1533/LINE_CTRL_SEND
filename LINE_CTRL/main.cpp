@@ -39,6 +39,13 @@ VOID CALLBACK TimerProc(HWND hWnd, UINT uMsg, UINT idEvent, DWORD dwTime) {
 				inp[0].ki.dwExtraInfo = 0;
 				inp[0].ki.time = 0;
 				SendInput(1, inp, sizeof(INPUT));
+				inp[0].type = INPUT_KEYBOARD;
+				inp[0].ki.wVk = VK_RETURN;
+				inp[0].ki.wScan = (short)MapVirtualKey(VK_RETURN, 0);
+				inp[0].ki.dwFlags = KEYEVENTF_EXTENDEDKEY|KEYEVENTF_KEYUP;
+				inp[0].ki.dwExtraInfo = 0;
+				inp[0].ki.time = 0;
+				SendInput(1, inp, sizeof(INPUT));
 			}
 			if (!(GetAsyncKeyState(VK_RETURN) & 0x8000)) {
 				enFlag = false;
