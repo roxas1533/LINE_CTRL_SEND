@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\roxas1533\source\repos\LINE_CTRL_SEND\LINE_CTRL\main.cpp(127,12): warning C4244: 'return': 'WPARAM' から 'int' への変換です。データが失われる可能性があります。
+  コード生成しています。
+  Previous IPDB not found, fall back to full compilation.
+  All 4 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  コード生成が終了しました。
+  LINE_CTRL.vcxproj -> C:\Users\roxas1533\source\repos\LINE_CTRL_SEND\x64\Release\LINE_CTRL.exe

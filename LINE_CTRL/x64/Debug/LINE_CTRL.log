@@ -1,3 +1,3 @@
 ﻿  main.cpp
-C:\Users\roxas1533\source\repos\LINE_CTRL_SEND\LINE_CTRL\main.cpp(109,12): warning C4244: 'return': 'WPARAM' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\roxas1533\source\repos\LINE_CTRL_SEND\LINE_CTRL\main.cpp(127,12): warning C4244: 'return': 'WPARAM' から 'int' への変換です。データが失われる可能性があります。
   LINE_CTRL.vcxproj -> C:\Users\roxas1533\source\repos\LINE_CTRL_SEND\x64\Debug\LINE_CTRL.exe
