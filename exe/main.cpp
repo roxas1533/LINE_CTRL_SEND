@@ -13,7 +13,7 @@ void debugError(const char* out) {
 void debugError(std::string out) {
 	debugError(out.c_str());
 }
-typedef void(*GetHWND)(HWND hwnd);
+typedef void(*GetHWND)(HWND hwnd, HINSTANCE proid);
 int main(int argc, char* argv[]) {
 	if(argc!=1)
 		isDebug = true;
@@ -72,10 +72,10 @@ int main(int argc, char* argv[]) {
 	);
 	if (isSuccess) {
 		debugError("プロセス開始成功");
-		debugError(std::string("プロセス:") + std::to_string((long long)tProcessInfomation.hProcess));
-		debugError(std::string("PID:") + std::to_string((long long)tProcessInfomation.dwProcessId));
+		debugError(std::string("プロセス:") + std::to_string((INT_PTR)tProcessInfomation.hProcess));
+		debugError(std::string("PID:") + std::to_string((INT_PTR)tProcessInfomation.dwProcessId));
 
-		HMODULE hModule = LoadLibraryA(dllPath);
+		HINSTANCE hModule = LoadLibraryA(dllPath);
 		if (hModule) {
 			GetHWND setHwnd = (GetHWND)GetProcAddress(hModule, "setWind");
 			HWND LINEHwnd = GetWindowHandle(tProcessInfomation.dwProcessId);
@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
 			std::stringstream stream;
 			stream << std::hex << LINEHwnd;
 			debugError(std::string("ウィンドウハンドル取得:")+stream.str());
-			setHwnd(LINEHwnd);
+			setHwnd(LINEHwnd, hModule);
 		}
 
 	}

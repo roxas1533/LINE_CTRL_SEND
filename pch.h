@@ -12,5 +12,7 @@
 #include "rewrite.h"
 #include <iostream>
 #include <cstdint>
+#include <vector>
+#include <tlhelp32.h>
 
 #endif //PCH_H
