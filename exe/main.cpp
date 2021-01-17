@@ -5,7 +5,7 @@
 #include <string>
 #include<fstream>
 #pragma comment(lib, "winmm.lib")
-bool isDebug = true;
+bool isDebug = false;
 void debugError(const char* out) {
 	if (isDebug)
 		std::cout << out << "\n";
@@ -13,10 +13,19 @@ void debugError(const char* out) {
 void debugError(std::string out) {
 	debugError(out.c_str());
 }
-typedef void(*GetHWND)(HWND hwnd, HINSTANCE proid);
-int main(int argc, char* argv[]) {
-	if(argc!=1)
+typedef void(*GetHWND)(HWND hwnd);
+int main(int argc, char* argv[]);
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
+	if (__argc != 1) {
 		isDebug = true;
+		AllocConsole();
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+	}
+	main(__argc,__argv);
+	return 0;
+}
+int main(int argc, char* argv[]) {
 	STARTUPINFOA  tStartupInfo = { 0 };
 	PROCESS_INFORMATION tProcessInfomation = { 0 };
 	char c[] = "C:\\Users\\%username%\\AppData\\Local\\LINE\\bin\\current\\LINE.exe";
@@ -79,6 +88,7 @@ int main(int argc, char* argv[]) {
 		if (hModule) {
 			GetHWND setHwnd = (GetHWND)GetProcAddress(hModule, "setWind");
 			HWND LINEHwnd = GetWindowHandle(tProcessInfomation.dwProcessId);
+			debugError("起動待機中...");
 			while (!LINEHwnd)
 				LINEHwnd = GetWindowHandle(tProcessInfomation.dwProcessId);
 			while (LINEHwnd)
@@ -88,7 +98,7 @@ int main(int argc, char* argv[]) {
 			std::stringstream stream;
 			stream << std::hex << LINEHwnd;
 			debugError(std::string("ウィンドウハンドル取得:")+stream.str());
-			setHwnd(LINEHwnd, hModule);
+			setHwnd(LINEHwnd);
 		}
 
 	}

@@ -4,11 +4,9 @@
 #pragma data_seg("shared")
 HHOOK hMyHook;
 HWND parentWnd = 0;
-HINSTANCE parentProcess = 0;
-DWORD nowThreadId = 0;
 #pragma data_seg()
 
-extern "C" __declspec(dllexport) void setWind(HWND hwnd, HINSTANCE proid);
+extern "C" __declspec(dllexport) void setWind(HWND hwnd);
 LONG_PTR DefStaticProc;
 std::vector<INPUT> returnInput;
 std::vector<INPUT> sendInput;
@@ -41,7 +39,7 @@ void HookMessage() {
 	DefStaticProc = GetWindowLongPtr(parentWnd, GWLP_WNDPROC);
 	SetWindowLongPtr(parentWnd, GWLP_WNDPROC, (__int3264)(LONG_PTR)StaticProc);
 }
-void setWind(HWND hwnd, HINSTANCE proid) {
+void setWind(HWND hwnd) {
 	parentWnd = hwnd;
 }
 
@@ -62,9 +60,6 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH: {
-		AllocConsole();
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
 		//PrintFunctions();
 		HookMessage();
 		pushKey(returnInput, VK_SHIFT,0);
@@ -72,7 +67,6 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 		pushKey(returnInput, VK_RETURN, KEYEVENTF_KEYUP);
 		pushKey(returnInput, VK_SHIFT, KEYEVENTF_KEYUP);
 		pushKey(sendInput, VK_CONTROL, KEYEVENTF_KEYUP);
-		pushKey(sendInput, VK_RETURN, KEYEVENTF_KEYUP);
 		pushKey(sendInput, VK_RETURN,0);
 		pushKey(sendInput, VK_RETURN, KEYEVENTF_KEYUP);
 
