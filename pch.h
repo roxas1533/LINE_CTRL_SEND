@@ -9,10 +9,10 @@
 
 // プリコンパイルするヘッダーをここに追加します
 #include "framework.h"
-#include "rewrite.h"
 #include <iostream>
 #include <cstdint>
 #include <vector>
 #include <tlhelp32.h>
+#include <commctrl.h>
 
 #endif //PCH_H

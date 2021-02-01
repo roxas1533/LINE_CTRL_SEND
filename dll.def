@@ -1,0 +1,4 @@
+LIBRARY LINE
+
+EXPORTS
+	HookCreateWindowExW
