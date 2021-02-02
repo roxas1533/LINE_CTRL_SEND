@@ -55,13 +55,15 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 #if _DEBUG  
-	char dllPath[] = "LINEdll.dll";
+	//char dllPath[] = "LINEdll.dll";
+	std::string dllPath = (std::filesystem::current_path() / "LINEdll.dll").string();
 #else
 	char dllPath[] = "LINEdll.dll";
 #endif
-	ifs = std::ifstream((std::string(dllPath)));
+	ifs = std::ifstream(dllPath);
 	if (!ifs) {
 		debugError("dllファイル存在確認失敗");
+		debugError(dllPath);
 		MessageBoxA(NULL, "LINE.dllが存在しません", "LINEERROR", MB_OK);
 		return 0;
 	}
@@ -88,7 +90,7 @@ int main(int argc, char* argv[]) {
 		debugError(std::string("プロセス:") + std::to_string((INT_PTR)tProcessInfomation.hProcess));
 		debugError(std::string("PID:") + std::to_string((INT_PTR)tProcessInfomation.dwProcessId));
 
-		hModule = LoadLibraryA(dllPath);
+		hModule = LoadLibraryA(dllPath.c_str());
 		if (hModule) {
 			GetHWND setHwnd = (GetHWND)GetProcAddress(hModule, "setWind");
 			HWND LINEHwnd = GetWindowHandle(tProcessInfomation.dwProcessId);
@@ -110,7 +112,7 @@ int main(int argc, char* argv[]) {
 		debugError(std::string("起動に失敗しました。エラーコード:") + std::to_string(GetLastError()));
 		MessageBoxA(NULL, (std::string("起動に失敗しました。エラーコード:") + std::to_string(GetLastError())).c_str(), "LINEERROR", MB_OK);
 	}
-	LPSTR libPath = dllPath;
+	LPSTR libPath =(LPSTR)(LPCSTR)dllPath.c_str();
 	DWORD pathSize;
 	pathSize = strlen(libPath) + 1;
 	LPSTR remoteLibPath = (LPSTR)VirtualAllocEx(tProcessInfomation.hProcess, NULL, pathSize, MEM_COMMIT, PAGE_READWRITE);
