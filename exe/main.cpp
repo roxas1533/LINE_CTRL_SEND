@@ -55,7 +55,8 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 #if _DEBUG  
-	char dllPath[] = "LINEdll.dll";
+	//char dllPath[] = "LINEdll.dll";
+	char dllPath[] = "C:\\Users\\roxas1533\\source\\repos\\LINEDLL\\Debug\\LINEdll.dll";
 #else
 	char dllPath[] = "LINEdll.dll";
 #endif
@@ -78,10 +79,11 @@ int main(int argc, char* argv[]) {
 		, FALSE
 		, 0
 		, NULL
-		, NULL
+		, std::filesystem::path(exePath).parent_path().string().c_str()
 		, &tStartupInfo
 		, &tProcessInfomation
 	);
+	//ResumeThread(tProcessInfomation.hThread);
 	if (isSuccess) {
 		debugError("プロセス開始成功");
 		debugError(std::string("プロセス:") + std::to_string((INT_PTR)tProcessInfomation.hProcess));
@@ -197,7 +199,6 @@ int main(int argc, char* argv[]) {
 	}
 	if (isDebug)
 		getchar();
-	//ResumeThread(tProcessInfomation.hThread);
 	::CloseHandle(tProcessInfomation.hProcess);
 	::CloseHandle(tProcessInfomation.hThread);
 

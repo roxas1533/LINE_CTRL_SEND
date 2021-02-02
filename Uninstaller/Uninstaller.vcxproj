@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f6d59b9e-d811-405a-9217-3f9543fc006c}</ProjectGuid>
-    <RootNamespace>Installer</RootNamespace>
+    <ProjectGuid>{dc3af0a8-ea1d-4889-92c1-778cee931058}</ProjectGuid>
+    <RootNamespace>Uninstaller</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -143,22 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LnkClass.cpp" />
-    <ClCompile Include="lnkStruct.cpp" />
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="LnkClass.h" />
-    <ClInclude Include="lnkStruct.h" />
-    <ClInclude Include="resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Installer.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Debug\LINEdll.dll" />
-    <None Include="..\Debug\LINEEXE.exe" />
-    <None Include="..\Debug\Uninstaller.exe" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

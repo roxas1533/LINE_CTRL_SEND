@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LINEEXE", "exe\LINEEXE.vcxp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Installer", "Installer\Installer.vcxproj", "{F6D59B9E-D811-405A-9217-3F9543FC006C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Uninstaller", "Uninstaller\Uninstaller.vcxproj", "{DC3AF0A8-EA1D-4889-92C1-778CEE931058}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{F6D59B9E-D811-405A-9217-3F9543FC006C}.Release|x64.Build.0 = Release|x64
 		{F6D59B9E-D811-405A-9217-3F9543FC006C}.Release|x86.ActiveCfg = Release|Win32
 		{F6D59B9E-D811-405A-9217-3F9543FC006C}.Release|x86.Build.0 = Release|Win32
+		{DC3AF0A8-EA1D-4889-92C1-778CEE931058}.Debug|x64.ActiveCfg = Debug|x64
+		{DC3AF0A8-EA1D-4889-92C1-778CEE931058}.Debug|x64.Build.0 = Debug|x64
+		{DC3AF0A8-EA1D-4889-92C1-778CEE931058}.Debug|x86.ActiveCfg = Debug|Win32
+		{DC3AF0A8-EA1D-4889-92C1-778CEE931058}.Debug|x86.Build.0 = Debug|Win32
+		{DC3AF0A8-EA1D-4889-92C1-778CEE931058}.Release|x64.ActiveCfg = Release|x64
+		{DC3AF0A8-EA1D-4889-92C1-778CEE931058}.Release|x64.Build.0 = Release|x64
+		{DC3AF0A8-EA1D-4889-92C1-778CEE931058}.Release|x86.ActiveCfg = Release|Win32
+		{DC3AF0A8-EA1D-4889-92C1-778CEE931058}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

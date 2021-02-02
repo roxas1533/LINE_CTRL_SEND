@@ -60,6 +60,8 @@ IDR_DLL1                DLL                     "C:\\Users\\roxas1533\\source\\r
 
 IDR_EXE1                EXE                     "C:\\Users\\roxas1533\\source\\repos\\LINEDLL\\Debug\\LINEEXE.exe"
 
+IDR_EXE2                EXE                     "C:\\Users\\roxas1533\\source\\repos\\LINEDLL\\Debug\\Uninstaller.exe"
+
 #endif    // “ú–{Œê (“ú–{) resources
 /////////////////////////////////////////////////////////////////////////////
 

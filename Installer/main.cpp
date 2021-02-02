@@ -54,7 +54,11 @@ int main() {
 			return 0;
 		if (WriteResorce(IDR_DLL1, "DLL", targetDirectory, "LINEdll.dll"))
 			return 0;
+		if (WriteResorce(IDR_EXE2, "EXE", targetDirectory, "uninstall.exe"))
+			return 0;
 		makeLNK(FILE_ATTRIBUTE_SYSTEM, targetDirectory / "LINECTRL.exe", targetDirectory / "LINE.lnk", targetDirectory);
+		makeLNK(FILE_ATTRIBUTE_SYSTEM, targetDirectory / "uninstall.exe", (root/startMenu).parent_path()/"LINECTRLunst.lnk", targetDirectory);
+		std::cout << "ショートカットファイルを作成しました。";
 		if (std::ifstream(root / desktop).is_open()) {
 			std::filesystem::rename(root / desktop, targetDirectory / "LINE.lnk.back");
 			std::filesystem::copy(targetDirectory / "LINE.lnk", root / desktop, std::filesystem::copy_options::overwrite_existing);
@@ -71,6 +75,7 @@ int main() {
 			std::filesystem::rename(root / taskBar, targetDirectory / "LINE.lnk.back");
 			std::filesystem::copy(targetDirectory / "LINE.lnk", root / taskBar, std::filesystem::copy_options::overwrite_existing);
 		}
+		std::cout << "オリジナルのショートカットファイルのバックアップを作成しました。\n";
 		std::filesystem::remove(targetDirectory / "LINE.lnk");
 		std::cout << "完了しました。終了するにはキーを押してください。\n";
 	}else
