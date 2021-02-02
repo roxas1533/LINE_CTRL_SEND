@@ -55,8 +55,7 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 #if _DEBUG  
-	//char dllPath[] = "LINEdll.dll";
-	char dllPath[] = "C:\\Users\\roxas1533\\source\\repos\\LINEDLL\\Debug\\LINEdll.dll";
+	char dllPath[] = "LINEdll.dll";
 #else
 	char dllPath[] = "LINEdll.dll";
 #endif
