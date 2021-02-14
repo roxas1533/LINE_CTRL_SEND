@@ -199,7 +199,7 @@ int main(int argc, char* argv[]) {
 		} while (VirtualQueryEx(tProcessInfomation.hProcess, tempH, &mBI, sizeof(MEMORY_BASIC_INFORMATION)));
 	}
 	if (isDebug)
-		getchar();
+		while(1);
 	::CloseHandle(tProcessInfomation.hProcess);
 	::CloseHandle(tProcessInfomation.hThread);
 
